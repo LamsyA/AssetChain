@@ -4,10 +4,10 @@ import Hero from "./Hero";
 
 function Homepage() {
   return (
-    <div>
+    <div className="">
       <Navbar />
-      <div className="p-4">
-      <Hero/>
+      <div className="">
+        <Hero />
       </div>
     </div>
   );
