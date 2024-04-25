@@ -61,7 +61,7 @@ contract Fractionalizer is ERC20, ERC20Pausable, Ownable, ERC20Permit {
     function unpause() public onlyOwner {
         _unpause();
     }
-
+// todo
     function buyFraction(address to, uint256 amount, address payer) public onlyOwner {
         require(totalSupply() + amount <= maxSupply, "Fractionalizer: Asset sold out");
         handlePayment(payer);

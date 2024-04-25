@@ -18,7 +18,7 @@ contract FractionalizerFactory {
     address immutable public cofo;
     // this is a mapping of tokenId to the fractionalizers
     mapping(uint256 => address) public fractionalizers;
-
+    mapping(uint => bool) public fractionalizerChekcer;
     event FractionalizerCreated(address fractionalizer, uint256 tokenId);
 
     constructor(address _cofo) {
@@ -40,7 +40,7 @@ contract FractionalizerFactory {
     ) external {
         require(fractionalizers[tokenId] == address(0), "FractionalizerFactory: fractionalizer already exists");
         require(msg.sender == IERC721(cofo).ownerOf(tokenId), "FractionalizerFactory: caller is not the owner of the token");
-
+        require(fractionalizerChekcer[tokenId]== false, "FractionlizerFactory: token already fractionized");
         Fractionalizer fractionalizer = new Fractionalizer(
             assetManager,
             assetName,
@@ -52,6 +52,7 @@ contract FractionalizerFactory {
         );
 
         fractionalizers[tokenId] = address(fractionalizer);
+        fractionalizerChekcer[tokenId] = true;
         emit FractionalizerCreated(address(fractionalizer), tokenId);
     }
 }
