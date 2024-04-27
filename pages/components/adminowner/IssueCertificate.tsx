@@ -10,7 +10,6 @@ import { ethers } from "ethers";
 interface IssueCertificateData {
   address: string;
   tokenId: number;
-  metadata: string;
   name: string;
   symbol:string;
   description:string;
@@ -26,7 +25,6 @@ const IssueCertificateForm: React.FC = () => {
   const [formData, setFormData] = useState<IssueCertificateData>({
     address: "",
     tokenId: 0,
-    metadata: "",
     name:"",
     symbol:"",
     description:"",
