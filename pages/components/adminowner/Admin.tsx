@@ -4,9 +4,15 @@ import UpdateCertificateForm from "./UpdateCertificate"; // Assuming the path is
 
 const Admin: React.FC = () => {
   return (
-    <div className="flex flex-row flex-wrap justify-center gap-4">
+    <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+      
+    <div className="text-center">
+      <h1 className="text-4xl md:text-6xl font-bold mb-4">
+      Certificate of Ownership
+      </h1>
       <IssueCertificateForm />
       <UpdateCertificateForm />
+    </div>
     </div>
   );
 };
