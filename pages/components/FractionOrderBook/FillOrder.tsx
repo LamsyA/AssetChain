@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { useWriteContract } from 'wagmi'
+import {abi} from "../../../out/FractionOrderBook.sol/FractionOrderBook.json";
+import {FractionOrderContract} from "../../../CONSTANTS.json";
 
 const FillOrder = () => {
+  const { data: hash, 
+    isPending,error, writeContract } = useWriteContract();
   const [tokenId, setTokenId] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,6 +15,21 @@ const FillOrder = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Fill Order:", tokenId);
+    try{
+      writeContract({
+        abi, address: `0x${FractionOrderContract}`, functionName:"fillOrder", args:[tokenId]
+      },{
+        onSuccess: (data)=> {
+          console.log("data:", data)
+        },
+        onError: (error)=>{
+          console.log("data: error", error)
+        } 
+        
+      })
+    }catch(error){
+
+    }
     // Add your logic to submit the fill order data here
     setTokenId(""); // Clear the form after submission
   };
