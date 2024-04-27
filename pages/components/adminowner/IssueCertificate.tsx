@@ -60,7 +60,7 @@ console.log("address: ", formData.address)
   console.log("metadata: ", MetaData)
 try {
   writeContract({
-    abi, address: `${CofoContractAddress}`, functionName: "issueCertificate",
+    abi, address: `0x${CofoContractAddress}`, functionName: "issueCertificate",
     args:[formData.address, BigInt(formData.tokenId), MetaData]
   }, {
     onSuccess: (data) => {
