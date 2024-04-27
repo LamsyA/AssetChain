@@ -45,7 +45,7 @@ const IssueCertificateForm: React.FC = () => {
     console.log("Issue Certificate:", formData);
     
 
-  const newhash = ethers.utils.formatBytes32String(`${formData.tokenId + formData.name + formData.symbol + formData.description + formData.uri}`) 
+  const newhash = ethers.utils.formatBytes32String(`${formData.tokenId+  formData.name + formData.symbol + formData.description + formData.uri}`) 
 
   let MetaData = {
     metadataHash: newhash, 
@@ -60,7 +60,7 @@ console.log("address: ", formData.address)
   console.log("metadata: ", MetaData)
 try {
   writeContract({
-    abi, address: "0x8fafEB727d25D2DB7C77f2F328DFf7796e3EF16B", functionName: "issueCertificate",
+    abi, address: `${CofoContractAddress}`, functionName: "issueCertificate",
     args:[formData.address, BigInt(formData.tokenId), MetaData]
   }, {
     onSuccess: (data) => {
