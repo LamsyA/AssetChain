@@ -13,8 +13,9 @@ function Homepage() {
         <Hero />
       </div>
       {/* <Register/>  */}
-      {/* <Admin/> */}
+
       
+
       <FractionalizeForm/>
     </div>
   );

@@ -12,7 +12,7 @@ contract AssetChainScript is Script {
     Fractionalizer deployedFractionalizer;
     FractionalizerFactory deployedFractionalizerFactory;
     FractionOrderBook deployedFractionOrderBook;
-    address owner = 0x4131811b8a4237712905650985A7474F8f92b18b;
+    address owner = 0x421B0DF6944958D1082a8a527823119AE1F84864;
 
     function run() public {
         vm.startBroadcast();
