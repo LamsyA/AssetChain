@@ -1,4 +1,7 @@
 import React, { useState, FormEvent } from "react";
+import { useWriteContract } from 'wagmi'
+import {abi} from "../../../out/FractionalizerFactory.sol/FractionalizerFactory.json";
+import {FractionalizeFactory} from "../../../CONSTANTS.json";
 
 interface FractionalizeData {
   tokenId: string;
@@ -12,6 +15,9 @@ interface FractionalizeData {
 }
 
 const FractionalizeForm: React.FC = () => {
+  const { data: hash, 
+    isPending,error, writeContract } = useWriteContract();
+
   const [formData, setFormData] = useState<FractionalizeData>({
     tokenId: "",
     assetManager: "",
@@ -32,16 +38,31 @@ const FractionalizeForm: React.FC = () => {
     event.preventDefault();
     console.log("Fractionalize:", formData);
     // You can add logic here to handle form submission, such as sending data to an API
-    setFormData({
-      tokenId: "",
-      assetManager: "",
-      assetName: "",
-      assetSymbol: "",
-      assetPrice: "",
-      paymentToken: "",
-      description: "",
-      uri: "",
-    });
+
+    try{
+      writeContract({
+        abi, address: `${FractionalizeFactory}`, functionName: "fractionalize", args:[formData.tokenId, formData.assetManager, formData.assetName, formData.assetSymbol, formData.assetPrice, formData.paymentToken, formData.description, formData.uri]
+      }, {
+        onSuccess: (data)=>{
+          console.log("data:", data)
+        },
+        onError: (error)=>{
+          console.log("data: error ", error)
+        }
+      })
+    } catch (error){
+      console.log("error: ", error)
+    }
+    // setFormData({
+    //   tokenId: "",
+    //   assetManager: "",
+    //   assetName: "",
+    //   assetSymbol: "",
+    //   assetPrice: "",
+    //   paymentToken: "",
+    //   description: "",
+    //   uri: "",
+    // });
   };
 
   return (
