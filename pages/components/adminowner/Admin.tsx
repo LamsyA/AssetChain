@@ -8,7 +8,9 @@ const Admin: React.FC = () => {
       
     <div className="text-center">
       <h1 className="text-4xl md:text-6xl font-bold mb-4">
-      Certificate of Ownership
+
+      Certificate of Ownership 
+
       </h1>
       <IssueCertificateForm />
       <UpdateCertificateForm />
