@@ -13,6 +13,8 @@ import {
   optimism,
   polygon,
   sepolia,
+  scrollTestnet,
+  scrollSepolia
 } from "wagmi/chains";
 import {
   getDefaultConfig,
@@ -35,6 +37,7 @@ const config = getDefaultConfig({
     [sepolia.id]: http(
       "https://eth-sepolia.g.alchemy.com/v2/jRWeU9pFpeATDtbmRTHOuSuSp5OVVAO0",
     ), // http('https://eth-sepolia.g.alchemy.com/v2/...')
+    [scrollSepolia.id]: http("https://sepolia-rpc.scroll.io/")  
   },
   wallets: [
     ...wallets,
@@ -46,6 +49,7 @@ const config = getDefaultConfig({
   chains: [
     // mainnet,
     sepolia,
+    scrollSepolia,
     // polygon,
     // optimism,
     // arbitrum,
