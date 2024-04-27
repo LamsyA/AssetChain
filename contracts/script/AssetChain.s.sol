@@ -12,13 +12,13 @@ contract AssetChainScript is Script {
     Fractionalizer deployedFractionalizer;
     FractionalizerFactory deployedFractionalizerFactory;
     FractionOrderBook deployedFractionOrderBook;
-    address owner = makeAddr("owner");
-
-    function setUp() public {}
+    address owner = 0x4131811b8a4237712905650985A7474F8f92b18b;
 
     function run() public {
         vm.startBroadcast();
         deployedCofo = new COFO(owner);
+        deployedFractionalizerFactory = new FractionalizerFactory(address(deployedCofo));
+        deployedFractionOrderBook = new FractionOrderBook();
         vm.stopBroadcast();
     }
 }

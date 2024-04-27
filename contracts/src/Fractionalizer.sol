@@ -39,7 +39,7 @@ contract Fractionalizer is ERC20, ERC20Pausable, Ownable, ERC20Permit {
     // ===================================
     // CONSTRUCTOR
     // ===================================
-
+// 
     constructor(
         address assetManager,
         string memory assetName,
