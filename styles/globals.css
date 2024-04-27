@@ -55,7 +55,7 @@ a {
 }
 
 .text-gradient {
-  background: -webkit-linear-gradient(#bee901, #e39013);
+  background: -webkit-linear-gradient(#bee901, #dcddc534);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
