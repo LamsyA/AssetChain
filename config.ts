@@ -1,10 +1,10 @@
 import { http, createConfig } from 'wagmi'
-import { mainnet, sepolia } from 'wagmi/chains'
+import { mainnet, scrollSepolia, scrollTestnet, sepolia } from 'wagmi/chains'
 
 export const config = createConfig({
-  chains: [mainnet, sepolia],
+  chains: [mainnet, scrollSepolia],
   transports: {
     [mainnet.id]: http(),
-    [sepolia.id]: http(),
+    [scrollSepolia.id]: http("https://sepolia-rpc.scroll.io/")  
   },
 })
