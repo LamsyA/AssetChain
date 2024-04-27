@@ -14,11 +14,11 @@ contract AssetChainScript is Script {
     FractionOrderBook deployedFractionOrderBook;
     address owner = makeAddr("owner");
 
-    function setUp() public {}
-
     function run() public {
         vm.startBroadcast();
         deployedCofo = new COFO(owner);
+        deployedFractionalizerFactory = new FractionalizerFactory(address(deployedCofo));
+        deployedFractionOrderBook = new FractionOrderBook();
         vm.stopBroadcast();
     }
 }
