@@ -1,6 +1,7 @@
 import React from "react";
 import IssueCertificateForm from "./IssueCertificate"; // Assuming the path is correct
 import UpdateCertificateForm from "./UpdateCertificate"; // Assuming the path is correct
+import { useAccount } from 'wagmi';
 
 const Admin: React.FC = () => {
   return (
