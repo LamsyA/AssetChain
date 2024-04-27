@@ -58,7 +58,7 @@ const IssueCertificateForm: React.FC = () => {
     uri: formData.uri 
 };
     writeContract({
-      abi, address: `${CofoContractAddress}`, functionName: "issueCertificate",
+      abi, address: `0x${CofoContractAddress}`, functionName: "issueCertificate",
       args:[formData.address, formData.tokenId, metadata]
     })
     // You can add logic here to handle form submission, such as sending data to an API
