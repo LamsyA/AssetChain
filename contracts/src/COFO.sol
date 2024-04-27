@@ -28,8 +28,7 @@ contract COFO is ERC721, ERC721URIStorage, ERC721Pausable, Ownable, ERC721Burnab
     }
 
     // this mapping maps tokenId to it coresponing metadata
-    mapping (uint256 => MetaData) public metadata;
-
+    mapping(uint256 => MetaData) public metadata;
 
     constructor(address manager) ERC721("Cerificate Of Ownership", "COFO") Ownable(manager) {}
 
@@ -48,16 +47,13 @@ contract COFO is ERC721, ERC721URIStorage, ERC721Pausable, Ownable, ERC721Burnab
     }
 
     /**
-     * 
+     *
      * @param to this is the address receiving this NFT
      * @param tokenId this is the token id of this NFT
      * @param meta this is the metadata of the real estate salary
      * @notice this function is used by the manager to issue new certificates
      */
-    function issueCertificate(address to, uint256 tokenId, MetaData memory meta)
-        public
-        onlyOwner
-    {
+    function issueCertificate(address to, uint256 tokenId, MetaData memory meta) public onlyOwner {
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, meta.uri);
         _setMetadata(tokenId, meta);
@@ -84,21 +80,11 @@ contract COFO is ERC721, ERC721URIStorage, ERC721Pausable, Ownable, ERC721Burnab
     // View Functions
     // =============================
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (string memory)
-    {
+    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
         return super.tokenURI(tokenId);
     }
 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721, ERC721URIStorage)
-        returns (bool)
-    {
+    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721URIStorage) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
 }
