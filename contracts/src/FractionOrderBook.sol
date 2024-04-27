@@ -106,7 +106,7 @@ contract FractionOrderBook {
         IERC20(order.paymentToken).transferFrom(msg.sender, order.owner, order.price);
 
         order.isFilled = true;
-    }
+    }x
 
 
     /**

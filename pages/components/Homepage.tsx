@@ -3,7 +3,9 @@ import Navbar from "./Navbar/Navbar";
 import Hero from "./Hero";
 import Register from "./Register/Register";
 import Admin from "./adminowner/Admin";
-
+import CreateOrder from "./FractionOrderBook/CreateOrder";
+import FillOrder from "./FractionOrderBook/FillOrder";
+import TerminateOrder from "./FractionOrderBook/TerminateOrder";
 import router, { useRouter } from 'next/router';
 import { getAccount } from '@wagmi/core'
 
@@ -19,8 +21,11 @@ function Homepage() {
         <Hero />
       </div>
       
-
-      <Admin/>
+      <CreateOrder/>
+      <FillOrder/>  
+      <TerminateOrder/>
+      
+      {/* <Admin/> */}
       <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       type="button" onClick={() => router.push('/components/FractionilizeContract/Fractionalize/')}>
         {/* <Link href="/components/FractionilizeContract/Fractionalize/"> */}

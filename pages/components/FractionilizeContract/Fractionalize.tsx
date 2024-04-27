@@ -41,7 +41,7 @@ const FractionalizeForm: React.FC = () => {
 
     try{
       writeContract({
-        abi, address: `${FractionalizeFactory}`, functionName: "fractionalize", args:[formData.tokenId, formData.assetManager, formData.assetName, formData.assetSymbol, formData.assetPrice, formData.paymentToken, formData.description, formData.uri]
+        abi, address: `0x${FractionalizeFactory}`, functionName: "fractionalize", args:[formData.tokenId, formData.assetManager, formData.assetName, formData.assetSymbol, formData.assetPrice, formData.paymentToken, formData.description, formData.uri]
       }, {
         onSuccess: (data)=>{
           console.log("data:", data)
