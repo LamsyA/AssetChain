@@ -47,7 +47,8 @@ const IssueCertificateForm: React.FC = () => {
     console.log("Issue Certificate:", formData);
     
 
-  const newhash = ethers.utils.formatBytes32String(formData.metadata)
+  const newhash = ethers.utils.formatBytes32String(`${formData.tokenId + formData.name + formData.symbol + formData.description + formData.uri}`) 
+
   let MetaData = {
     metadataHash: newhash, 
     name: formData.name,
@@ -111,18 +112,7 @@ try {
       <br />
 
     
-    <label htmlFor="name" className="text-gray-700 font-medium mb-2">
-      MetaData Hash:
-    </label>
-    <input
-      type="text"
-      id="metadata"
-      name="metadata"
-      value={formData.metadata}
-      onChange={handleChange}
-      className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-    />
-    <br />
+   
 
     <label htmlFor="name" className="text-gray-700 font-medium mb-2">
       Name:
