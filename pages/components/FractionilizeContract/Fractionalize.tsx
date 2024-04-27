@@ -28,7 +28,7 @@ const FractionalizeForm: React.FC = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Fractionalize:", formData);
     // You can add logic here to handle form submission, such as sending data to an API
