@@ -15,7 +15,9 @@ const Register: React.FC = () => {
     uri: "",
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
@@ -28,7 +30,10 @@ const Register: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-md mx-auto p-4 bg-gray-100 rounded-lg shadow-md">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col w-full max-w-md mx-auto p-4 bg-gray-100 rounded-lg shadow-md"
+    >
       <label htmlFor="name" className="text-gray-700 font-medium mb-2">
         Name:
       </label>
@@ -80,7 +85,10 @@ const Register: React.FC = () => {
       />
       <br />
 
-      <button type="submit" className="bg-emerald-500 text-white font-medium py-2 px-4 rounded hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+      <button
+        type="submit"
+        className="bg-emerald-500 text-white font-medium py-2 px-4 rounded hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+      >
         Submit
       </button>
     </form>
