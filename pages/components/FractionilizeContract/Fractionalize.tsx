@@ -25,7 +25,7 @@ interface FractionalizeData {
 }
 
 const FractionalizeForm: React.FC = () => {
-  const { data: hash, isPending, error, writeContract } = useWriteContract();
+  const { data: hash, isPending,isSuccess,  error, writeContract } = useWriteContract();
   const [fraction] = useGlobalState("fraction");
 
   const [formData, setFormData] = useState<FractionalizeData>({
@@ -48,7 +48,7 @@ const FractionalizeForm: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Fractionalize:", formData);
+     console.log("Fractionalize:", formData);
    
     try {
       writeContract(
@@ -127,7 +127,7 @@ const FractionalizeForm: React.FC = () => {
     >
       <div
         className=" bg-white shadow-xl shadow-black rounded-xl
-    w-11/12 md:w-2/5 h-7/12 p-6"
+    w-11/12 md:w-2/5 h-7/12 p-5"
       >
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div className="flex justify-between items-center">
@@ -143,7 +143,7 @@ const FractionalizeForm: React.FC = () => {
               <FaTimes />
             </button>
           </div>
-          <div className="flex justify-center items-center mt-5">
+          <div className="flex justify-center items-center mt-1">
             <div className="rounded-xl overflow-hidden h-20 w-20 animate-pulse">
               <img
                 src={
@@ -205,9 +205,11 @@ const FractionalizeForm: React.FC = () => {
               required
             />
           </div>
+          <div className="flex justify-between items-center">
+
           <div
             className="flex justify-between items-center bg-gray-300
-            rounded-xl mt-5"
+            rounded-xl mt-5 mr-5"
           >
             <input
               className="block w-full bg-transparent border-0
@@ -238,6 +240,7 @@ const FractionalizeForm: React.FC = () => {
               onChange={handleChange}
               required
             />
+          </div>
           </div>
           <div
             className="flex justify-between items-center bg-gray-300
