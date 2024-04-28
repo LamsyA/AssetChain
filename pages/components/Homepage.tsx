@@ -28,9 +28,9 @@ function Homepage() {
       {/* <Admin /> */}
       {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       type="button" onClick={() => router.push('/components/FractionilizeContract/Fractionalize/')}> */}
-      {/* <Link href="/components/FractionilizeContract/Fractionalize/"> */}
-      {/* Fractionalize */}
-      {/* </Link> */}
+      <Link href="/components/FractionilizeContract/Fractionalize/">
+      Fractionalize
+      </Link>
       {/* </button> */}
       {/* <FractionalizeForm/> */}
       {/* <FractionalizeForm/> */}

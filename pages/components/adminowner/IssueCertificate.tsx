@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useAccount } from "wagmi";
 import { useWriteContract } from "wagmi";
 import { FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { abi } from "../../../out/COFO.sol/COFO.json";
 import { CofoContractAddress } from "../../../CONSTANTS.json";
-import { useChainId } from "wagmi";
 import { ethers } from "ethers";
 import {
   setAlert,
@@ -26,7 +24,7 @@ interface IssueCertificateData {
 const IssueCertificateForm: React.FC = () => {
   const [createModal] = useGlobalState("createModal");
   const { data: hash, isPending, error, writeContract } = useWriteContract();
-  const chainId = useChainId();
+
 
   const [formData, setFormData] = useState<IssueCertificateData>({
     address: "",
