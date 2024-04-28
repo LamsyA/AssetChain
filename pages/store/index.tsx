@@ -2,23 +2,24 @@ import { createGlobalState } from "react-hooks-global-state";
 
 const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
   createModal: "scale-0",
-  showNft: "scale-0",
+  fraction: "scale-0",
   updateModal: "scale-0",
-  loader: { show: false, msg: "" },
-  alert: { show: false, msg: "", color: "" },
+  loading: { show: false, msg: '' },
+  alert: { show: false, msg: '', color: '' },
 });
 
-const setAlert = (msg: any, color = "green") => {
-  setGlobalState("loader", { show: false, msg: "" });
-  setGlobalState("alert", { show: true, msg, color });
+const setAlert = (msg: string, color = 'green') => {
+  setGlobalState('loading', { show: false, msg: '' })
+  setGlobalState('alert', { show: true, msg, color })
   setTimeout(() => {
-    setGlobalState("alert", { show: false, msg, color });
-  }, 6000);
-};
+    setGlobalState('alert', { show: false, msg, color })
+  }, 6000)
+}
 
 const setLoadingMsg = (msg: string) => {
-  setGlobalState("loader", { show: true, msg });
-};
+  setGlobalState('loading', { show: true, msg })
+}
+
 
 const slice = (
   text: string,
