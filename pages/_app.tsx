@@ -1,8 +1,9 @@
 "use client";
-
+import { ToastContainer } from "react-toastify";
 import "../styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";
 import type { AppProps } from "next/app";
+import "react-toastify/dist/ReactToastify.css";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider, http } from "wagmi";
@@ -14,7 +15,7 @@ import {
   polygon,
   sepolia,
   scrollTestnet,
-  scrollSepolia
+  scrollSepolia,
 } from "wagmi/chains";
 import {
   getDefaultConfig,
@@ -37,7 +38,7 @@ const config = getDefaultConfig({
     [sepolia.id]: http(
       "https://eth-sepolia.g.alchemy.com/v2/jRWeU9pFpeATDtbmRTHOuSuSp5OVVAO0",
     ), // http('https://eth-sepolia.g.alchemy.com/v2/...')
-    [scrollSepolia.id]: http("https://sepolia-rpc.scroll.io/")  
+    [scrollSepolia.id]: http("https://sepolia-rpc.scroll.io/"),
   },
   wallets: [
     ...wallets,
@@ -67,6 +68,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={client}>
         <RainbowKitProvider>
           <Component {...pageProps} />
+          <ToastContainer />
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

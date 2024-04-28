@@ -13,7 +13,9 @@ const UpdateCertificateForm: React.FC = () => {
     address: "",
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = event.target;
     // Handle number input for tokenId
     const newValue = name === "tokenId" ? parseInt(value) : value;
@@ -28,7 +30,10 @@ const UpdateCertificateForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full max-w-md mx-auto p-4 bg-white rounded-lg shadow-md">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col w-full max-w-md mx-auto p-4 bg-white rounded-lg shadow-md"
+    >
       <h2 className="text-xl font-bold text-gray-800">Update Certificate</h2>
       <label htmlFor="addressTo" className="text-gray-700 font-medium mb-2">
         Transfer To Address:
@@ -69,7 +74,10 @@ const UpdateCertificateForm: React.FC = () => {
       />
       <br />
 
-      <button type="submit" className="bg-orange-500 text-white font-medium py-2 px-4 rounded hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+      <button
+        type="submit"
+        className="bg-orange-500 text-white font-medium py-2 px-4 rounded hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+      >
         Update
       </button>
     </form>

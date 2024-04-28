@@ -1,7 +1,7 @@
 import React, { useState, FormEvent } from "react";
-import { useWriteContract } from 'wagmi'
-import {abi} from "../../../out/FractionalizerFactory.sol/FractionalizerFactory.json";
-import {FractionalizeFactory} from "../../../CONSTANTS.json";
+import { useWriteContract } from "wagmi";
+import { abi } from "../../../out/FractionalizerFactory.sol/FractionalizerFactory.json";
+import { FractionalizeFactory } from "../../../CONSTANTS.json";
 
 interface FractionalizeData {
   tokenId: string;
@@ -15,8 +15,7 @@ interface FractionalizeData {
 }
 
 const FractionalizeForm: React.FC = () => {
-  const { data: hash, 
-    isPending,error, writeContract } = useWriteContract();
+  const { data: hash, isPending, error, writeContract } = useWriteContract();
 
   const [formData, setFormData] = useState<FractionalizeData>({
     tokenId: "",
@@ -29,7 +28,9 @@ const FractionalizeForm: React.FC = () => {
     uri: "",
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
@@ -39,19 +40,34 @@ const FractionalizeForm: React.FC = () => {
     console.log("Fractionalize:", formData);
     // You can add logic here to handle form submission, such as sending data to an API
 
-    try{
-      writeContract({
-        abi, address: `0x${FractionalizeFactory}`, functionName: "fractionalize", args:[formData.tokenId, formData.assetManager, formData.assetName, formData.assetSymbol, formData.assetPrice, formData.paymentToken, formData.description, formData.uri]
-      }, {
-        onSuccess: (data)=>{
-          console.log("data:", data)
+    try {
+      writeContract(
+        {
+          abi,
+          address: `0x${FractionalizeFactory}`,
+          functionName: "fractionalize",
+          args: [
+            formData.tokenId,
+            formData.assetManager,
+            formData.assetName,
+            formData.assetSymbol,
+            formData.assetPrice,
+            formData.paymentToken,
+            formData.description,
+            formData.uri,
+          ],
         },
-        onError: (error)=>{
-          console.log("data: error ", error)
-        }
-      })
-    } catch (error){
-      console.log("error: ", error)
+        {
+          onSuccess: (data) => {
+            console.log("data:", data);
+          },
+          onError: (error) => {
+            console.log("data: error ", error);
+          },
+        },
+      );
+    } catch (error) {
+      console.log("error: ", error);
     }
     // setFormData({
     //   tokenId: "",
@@ -66,12 +82,19 @@ const FractionalizeForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <form
+      onSubmit={handleSubmit}
+      className="container mx-auto px-4 sm:px-6 lg:px-8 py-12"
+    >
       <div className="max-w-3xl mx-auto bg-gray-200 dark:bg-gray-800 rounded-lg shadow-md p-8">
-        <h2 className="text-center mb-4 text-xl font-bold text-gray-800 dark:text-white">Fractionalize Asset</h2>
+        <h2 className="text-center mb-4 text-xl font-bold text-gray-800 dark:text-white">
+          Fractionalize Asset
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex flex-col">
-            <label htmlFor="tokenId" className="text-gray-700 font-medium mb-2">Token ID:</label>
+            <label htmlFor="tokenId" className="text-gray-700 font-medium mb-2">
+              Token ID:
+            </label>
             <input
               type="text"
               id="tokenId"
@@ -82,7 +105,12 @@ const FractionalizeForm: React.FC = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="assetManager" className="text-gray-700 font-medium mb-2">Asset Manager Address:</label>
+            <label
+              htmlFor="assetManager"
+              className="text-gray-700 font-medium mb-2"
+            >
+              Asset Manager Address:
+            </label>
             <input
               type="text"
               id="assetManager"
@@ -93,7 +121,12 @@ const FractionalizeForm: React.FC = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="assetName" className="text-gray-700 font-medium mb-2">Asset Name:</label>
+            <label
+              htmlFor="assetName"
+              className="text-gray-700 font-medium mb-2"
+            >
+              Asset Name:
+            </label>
             <input
               type="text"
               id="assetName"
@@ -104,7 +137,12 @@ const FractionalizeForm: React.FC = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="assetSymbol" className="text-gray-700 font-medium mb-2">Asset Symbol:</label>
+            <label
+              htmlFor="assetSymbol"
+              className="text-gray-700 font-medium mb-2"
+            >
+              Asset Symbol:
+            </label>
             <input
               type="text"
               id="assetSymbol"
@@ -115,7 +153,12 @@ const FractionalizeForm: React.FC = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="assetPrice" className="text-gray-700 font-medium mb-2">Asset Price:</label>
+            <label
+              htmlFor="assetPrice"
+              className="text-gray-700 font-medium mb-2"
+            >
+              Asset Price:
+            </label>
             <input
               type="text"
               id="assetPrice"
@@ -126,7 +169,12 @@ const FractionalizeForm: React.FC = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="paymentToken" className="text-gray-700 font-medium mb-2">Payment Token Address:</label>
+            <label
+              htmlFor="paymentToken"
+              className="text-gray-700 font-medium mb-2"
+            >
+              Payment Token Address:
+            </label>
             <input
               type="text"
               id="paymentToken"
@@ -137,7 +185,12 @@ const FractionalizeForm: React.FC = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="description" className="text-gray-700 font-medium mb-2">Description:</label>
+            <label
+              htmlFor="description"
+              className="text-gray-700 font-medium mb-2"
+            >
+              Description:
+            </label>
             <textarea
               id="description"
               name="description"
@@ -147,7 +200,9 @@ const FractionalizeForm: React.FC = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="uri" className="text-gray-700 font-medium mb-2">URI (Optional):</label>
+            <label htmlFor="uri" className="text-gray-700 font-medium mb-2">
+              URI (Optional):
+            </label>
             <input
               type="text"
               id="uri"
@@ -158,7 +213,10 @@ const FractionalizeForm: React.FC = () => {
             />
           </div>
         </div>
-        <button type="submit" className="bg-teal-500 text-white px-4 py-2 rounded-md mt-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-700">
+        <button
+          type="submit"
+          className="bg-teal-500 text-white px-4 py-2 rounded-md mt-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-700"
+        >
           Fractionalize
         </button>
       </div>
