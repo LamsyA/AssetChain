@@ -3,6 +3,7 @@ import Navbar from "./Navbar/Navbar";
 import Hero from "./Hero";
 import Register from "./Register/Register";
 import Admin from "./adminowner/Admin";
+import Main from "./FractionOrderBook/Main";
 import CreateOrder from "./FractionOrderBook/CreateOrder";
 import FillOrder from "./FractionOrderBook/FillOrder";
 import TerminateOrder from "./FractionOrderBook/TerminateOrder";
@@ -22,6 +23,7 @@ function Homepage() {
         <Hero />
         <IssueCertificateForm />
       </div>
+      <Main/>
       {/* <CreateOrder /> */}
       {/* <FillOrder /> */}
       {/* <TerminateOrder /> */}

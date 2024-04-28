@@ -115,7 +115,7 @@ const CreateOrder = () => {
       </div>
       <div className="flex items-center mb-4">
         <label htmlFor="isBuy" className="text-gray-700 font-medium mr-4">
-          Buy Now:
+          Can Buy:
         </label>
         <input
           type="radio"
@@ -127,7 +127,7 @@ const CreateOrder = () => {
           className="focus:ring-teal-500 focus:ring-offset-2 mr-4" // Add margin-right
         />
         <label htmlFor="isBuy" className="text-gray-700 font-medium mr-2">
-          Buy Later:
+          Can't Buy :
         </label>
         <input
           type="radio"
