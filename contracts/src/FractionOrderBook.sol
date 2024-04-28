@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 /**
@@ -29,13 +28,10 @@ contract FractionOrderBook {
         bool isTerminated;
     }
 
-
     // this is a mapping fof the orders
     mapping(uint256 => Order) public orders;
     // this represents the order count
     uint256 public orderCount;
-
-
 
     event OrderCreated(
         address indexed owner,
@@ -48,7 +44,6 @@ contract FractionOrderBook {
         bool isTerminated
     );
 
-
     /**
      * @notice This function creates an order
      * @param _asset The address of the asset
@@ -57,13 +52,9 @@ contract FractionOrderBook {
      * @param _paymentToken The address of the payment token
      * @param _isBuy The status of the order
      */
-    function createOrder(
-        address _asset,
-        uint256 _amount,
-        uint256 _price,
-        address _paymentToken,
-        bool _isBuy
-    ) external {
+    function createOrder(address _asset, uint256 _amount, uint256 _price, address _paymentToken, bool _isBuy)
+        external
+    {
         Order memory order = Order({
             owner: msg.sender,
             asset: _asset,
@@ -106,8 +97,7 @@ contract FractionOrderBook {
         IERC20(order.paymentToken).transferFrom(msg.sender, order.owner, order.price);
 
         order.isFilled = true;
-    }x
-
+    }
 
     /**
      * @notice This function terminates an order

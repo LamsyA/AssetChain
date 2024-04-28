@@ -1,7 +1,17 @@
 import React, { useState, FormEvent } from "react";
-import { useWriteContract } from 'wagmi'
-import {abi} from "../../../out/FractionalizerFactory.sol/FractionalizerFactory.json";
-import {FractionalizeFactory} from "../../../CONSTANTS.json";
+import { useWriteContract } from "wagmi";
+import { abi } from "../../../out/FractionalizerFactory.sol/FractionalizerFactory.json";
+import { FractionalizeFactory } from "../../../CONSTANTS.json";
+import { toast } from "react-toastify";
+import { FaTimes } from "react-icons/fa";
+
+import {
+  setAlert,
+  setLoadingMsg,
+  useGlobalState,
+  setGlobalState,
+} from "../../store";
+
 
 interface FractionalizeData {
   tokenId: string;
@@ -15,8 +25,8 @@ interface FractionalizeData {
 }
 
 const FractionalizeForm: React.FC = () => {
-  const { data: hash, 
-    isPending,error, writeContract } = useWriteContract();
+  const { data: hash, isPending, error, writeContract } = useWriteContract();
+  const [fraction] = useGlobalState("fraction");
 
   const [formData, setFormData] = useState<FractionalizeData>({
     tokenId: "",
@@ -29,7 +39,9 @@ const FractionalizeForm: React.FC = () => {
     uri: "",
   });
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
@@ -37,21 +49,46 @@ const FractionalizeForm: React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Fractionalize:", formData);
-    // You can add logic here to handle form submission, such as sending data to an API
-
-    try{
-      writeContract({
-        abi, address: `0x${FractionalizeFactory}`, functionName: "fractionalize", args:[formData.tokenId, formData.assetManager, formData.assetName, formData.assetSymbol, formData.assetPrice, formData.paymentToken, formData.description, formData.uri]
-      }, {
-        onSuccess: (data)=>{
-          console.log("data:", data)
+   
+    try {
+      writeContract(
+        {
+          abi,
+          address: `0x${FractionalizeFactory}`,
+          functionName: "fractionalize",
+          args: [
+            formData.tokenId,
+            formData.assetManager,
+            formData.assetName,
+            formData.assetSymbol,
+            formData.assetPrice,
+            formData.paymentToken,
+            formData.description,
+            formData.uri,
+          ],
+        }, {
+          onSuccess: (data) => {
+            console.log("data: ", data);
+            toast.success("Fractionalized Assest Deployed"); 
+             setFormData({
+      tokenId: "",
+      assetManager: "",
+      assetName: "",
+      assetSymbol: "",
+      assetPrice: "",
+      paymentToken: "",
+      description: "",
+      uri: "",
+    });
+          },
+          onError: (error) => {
+            console.log("error: ", error);
+            toast.error(` Failed to fractionalize asset`);
+          },
         },
-        onError: (error)=>{
-          console.log("data: error ", error)
-        }
-      })
-    } catch (error){
-      console.log("error: ", error)
+      );
+    } catch (error) {
+      console.log("error: ", error);
     }
     // setFormData({
     //   tokenId: "",
@@ -64,105 +101,204 @@ const FractionalizeForm: React.FC = () => {
     //   uri: "",
     // });
   };
+  const onClose = () => {
+    setGlobalState("fraction", "scale-0");
+    resetParam();
+  };
+  const resetParam = () => {
+    setFormData({
+      tokenId: "",
+      assetManager: "",
+      assetName: "",
+      assetSymbol: "",
+      assetPrice: "",
+      paymentToken: "",
+      description: "",
+      uri: "",
+    });
+  };
 
   return (
-    <form onSubmit={handleSubmit} className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="max-w-3xl mx-auto bg-gray-200 dark:bg-gray-800 rounded-lg shadow-md p-8">
-        <h2 className="text-center mb-4 text-xl font-bold text-gray-800 dark:text-white">Fractionalize Asset</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="flex flex-col">
-            <label htmlFor="tokenId" className="text-gray-700 font-medium mb-2">Token ID:</label>
+   
+    <div
+      className={`fixed top-10 left-0 bottom-2 w-screen h-screen flex
+    items-center justify-center bg-black bg-opacity-50
+    transform transition-transform duration-300 ${fraction}`}
+    >
+      <div
+        className=" bg-white shadow-xl shadow-black rounded-xl
+    w-11/12 md:w-2/5 h-7/12 p-6"
+      >
+        <form onSubmit={handleSubmit} className="flex flex-col">
+          <div className="flex justify-between items-center">
+            <p className="font-semibold  text-black">
+              {" "}
+              Fractionalize Asset
+            </p>
+            <button
+              type="button"
+              className="border-0 bg- text-black focus:outline-none "
+              onClick={onClose}
+            >
+              <FaTimes />
+            </button>
+          </div>
+          <div className="flex justify-center items-center mt-5">
+            <div className="rounded-xl overflow-hidden h-20 w-20 animate-pulse">
+              <img
+                src={
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfxgAU-BU1Lj7me8cXrw0pTRQxCL75tnMd40vTqvt_hA&s"
+                }
+                alt="project title"
+                className=" h-full w-full cursor-pointer object-cover    "
+              />
+            </div>
+          </div>
+          <div
+            className="flex justify-between items-center bg-gray-300
+            rounded-xl mt-5"
+          >
             <input
+              className="block w-full bg-transparent border-0
+                 text-sm text-slate-700 focus:outline-none p-1.5 
+                 focus:ring-0"
               type="text"
               id="tokenId"
               name="tokenId"
+              placeholder="Asset Token ID "
               value={formData.tokenId}
               onChange={handleChange}
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="assetManager" className="text-gray-700 font-medium mb-2">Asset Manager Address:</label>
+          <div
+            className="flex justify-between items-center bg-gray-300
+            rounded-xl mt-5"
+          >
             <input
+              className="block w-full bg-transparent border-0
+                 text-sm text-slate-700 focus:outline-none p-1.5 
+                 focus:ring-0"
               type="text"
               id="assetManager"
               name="assetManager"
+              placeholder="Asset Manager Address "
               value={formData.assetManager}
               onChange={handleChange}
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="assetName" className="text-gray-700 font-medium mb-2">Asset Name:</label>
+          <div
+            className="flex justify-between items-center bg-gray-300
+            rounded-xl mt-5"
+          >
             <input
+              className="block w-full bg-transparent border-0
+                 text-sm text-slate-700 focus:outline-none p-1.5 
+                 focus:ring-0"
               type="text"
               id="assetName"
               name="assetName"
+              placeholder="Asset Name"
               value={formData.assetName}
               onChange={handleChange}
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="assetSymbol" className="text-gray-700 font-medium mb-2">Asset Symbol:</label>
+          <div
+            className="flex justify-between items-center bg-gray-300
+            rounded-xl mt-5"
+          >
             <input
+              className="block w-full bg-transparent border-0
+                 text-sm text-slate-700 focus:outline-none p-1.5 
+                 focus:ring-0"
               type="text"
               id="assetSymbol"
               name="assetSymbol"
+              placeholder="Asset Symbol"
               value={formData.assetSymbol}
               onChange={handleChange}
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="assetPrice" className="text-gray-700 font-medium mb-2">Asset Price:</label>
+          <div
+            className="flex justify-between items-center bg-gray-300
+            rounded-xl mt-5"
+          >
             <input
+              className="block w-full bg-transparent border-0
+                 text-sm text-slate-700focus:outline-none p-1.5
+                 focus:ring-0"
               type="text"
               id="assetPrice"
               name="assetPrice"
+              placeholder="Asset Price"
               value={formData.assetPrice}
               onChange={handleChange}
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="paymentToken" className="text-gray-700 font-medium mb-2">Payment Token Address:</label>
+          <div
+            className="flex justify-between items-center bg-gray-300
+            rounded-xl mt-5"
+          >
             <input
-              type="text"
-              id="paymentToken"
-              name="paymentToken"
-              value={formData.paymentToken}
-              onChange={handleChange}
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="description" className="text-gray-700 font-medium mb-2">Description:</label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="uri" className="text-gray-700 font-medium mb-2">URI (Optional):</label>
-            <input
+              className="block w-full bg-transparent border-0
+                 text-sm text-slate-700focus:outline-none p-1.5
+                 focus:ring-0"
               type="text"
               id="uri"
               name="uri"
+              placeholder="Asset URI"
               value={formData.uri}
               onChange={handleChange}
-              className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
             />
           </div>
-        </div>
-        <button type="submit" className="bg-teal-500 text-white px-4 py-2 rounded-md mt-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-700">
-          Fractionalize
-        </button>
+          <div
+            className="flex justify-between items-center bg-gray-300
+            rounded-xl mt-5"
+          >
+            <input
+              className="block w-full bg-transparent border-0
+                 text-sm text-slate-700focus:outline-none p-1.5 
+                 focus:ring-0"
+              type="text"
+              id="paymentToken"
+              name="paymentToken"
+              placeholder="Payment Token Address"
+              value={formData.paymentToken}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div
+            className="flex justify-between items-center bg-gray-300
+            rounded-xl mt-5"
+          >
+            <textarea
+              className="block w-full bg-transparent border-0
+                 text-sm text-slate-700 focus:outline-none p-2 
+                 focus:ring-0"
+              id="description"
+              name="description"
+              placeholder="Description"
+              value={formData.description}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            className="inline-block bg-yellow-600 px-6 py-2.5 text-white
+            font-medium  leading-tight text-md rounded-full 
+            shadow-md hover:bg-yellow-700 mt-5"
+          >
+            Fractionise Asset
+          </button>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };
 

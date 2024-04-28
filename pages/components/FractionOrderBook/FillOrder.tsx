@@ -40,7 +40,10 @@ const FillOrder = () => {
       className="flex space-x-4 max-w-sm mx-auto px-4 py-4 bg-white rounded-lg shadow-md" // Added styles for responsiveness and visual appeal
     >
       <div className="w-full">
-        <label htmlFor="tokenId" className="text-gray-700 font-medium mb-2 block">
+        <label
+          htmlFor="tokenId"
+          className="text-gray-700 font-medium mb-2 block"
+        >
           Token ID:
         </label>
         <input

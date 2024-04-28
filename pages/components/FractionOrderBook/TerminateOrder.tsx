@@ -36,9 +36,15 @@ const TerminateOrder = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex space-x-4 max-w-sm mx-auto px-4 py-4 bg-white rounded-lg shadow-md">
+    <form
+      onSubmit={handleSubmit}
+      className="flex space-x-4 max-w-sm mx-auto px-4 py-4 bg-white rounded-lg shadow-md"
+    >
       <div className="w-full">
-        <label htmlFor="orderId" className="text-gray-700 font-medium mb-2 block">
+        <label
+          htmlFor="orderId"
+          className="text-gray-700 font-medium mb-2 block"
+        >
           Order ID:
         </label>
         <input
