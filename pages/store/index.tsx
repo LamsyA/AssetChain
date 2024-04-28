@@ -2,7 +2,7 @@ import { createGlobalState } from "react-hooks-global-state";
 
 const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
   createModal: "scale-0",
-  fraction: "scale-100",
+  fraction: "scale-0",
   updateModal: "scale-0",
   loading: { show: false, msg: '' },
   alert: { show: false, msg: '', color: '' },

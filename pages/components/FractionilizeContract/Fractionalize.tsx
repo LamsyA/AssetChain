@@ -121,7 +121,7 @@ const FractionalizeForm: React.FC = () => {
   return (
    
     <div
-      className={`fixed top-0 left-0 w-screen h-screen flex
+      className={`fixed top-10 left-0 bottom-2 w-screen h-screen flex
     items-center justify-center bg-black bg-opacity-50
     transform transition-transform duration-300 ${fraction}`}
     >
@@ -160,7 +160,7 @@ const FractionalizeForm: React.FC = () => {
           >
             <input
               className="block w-full bg-transparent border-0
-                 text-sm text-slate-700 focus:outline-none p-2 
+                 text-sm text-slate-700 focus:outline-none p-1.5 
                  focus:ring-0"
               type="text"
               id="tokenId"
@@ -168,6 +168,7 @@ const FractionalizeForm: React.FC = () => {
               placeholder="Asset Token ID "
               value={formData.tokenId}
               onChange={handleChange}
+              required
             />
           </div>
           <div
@@ -176,14 +177,15 @@ const FractionalizeForm: React.FC = () => {
           >
             <input
               className="block w-full bg-transparent border-0
-                 text-sm text-slate-700 focus:outline-none p-2 
+                 text-sm text-slate-700 focus:outline-none p-1.5 
                  focus:ring-0"
               type="text"
-              id="address"
-              name="address"
+              id="assetManager"
+              name="assetManager"
               placeholder="Asset Manager Address "
               value={formData.assetManager}
               onChange={handleChange}
+              required
             />
           </div>
           <div
@@ -192,7 +194,7 @@ const FractionalizeForm: React.FC = () => {
           >
             <input
               className="block w-full bg-transparent border-0
-                 text-sm text-slate-700 focus:outline-none p-2 
+                 text-sm text-slate-700 focus:outline-none p-1.5 
                  focus:ring-0"
               type="text"
               id="assetName"
@@ -200,6 +202,7 @@ const FractionalizeForm: React.FC = () => {
               placeholder="Asset Name"
               value={formData.assetName}
               onChange={handleChange}
+              required
             />
           </div>
           <div
@@ -208,7 +211,7 @@ const FractionalizeForm: React.FC = () => {
           >
             <input
               className="block w-full bg-transparent border-0
-                 text-sm text-slate-700 focus:outline-none p-2 
+                 text-sm text-slate-700 focus:outline-none p-1.5 
                  focus:ring-0"
               type="text"
               id="assetSymbol"
@@ -216,6 +219,7 @@ const FractionalizeForm: React.FC = () => {
               placeholder="Asset Symbol"
               value={formData.assetSymbol}
               onChange={handleChange}
+              required
             />
           </div>
           <div
@@ -224,7 +228,7 @@ const FractionalizeForm: React.FC = () => {
           >
             <input
               className="block w-full bg-transparent border-0
-                 text-sm text-slate-700focus:outline-none p-2 
+                 text-sm text-slate-700focus:outline-none p-1.5
                  focus:ring-0"
               type="text"
               id="assetPrice"
@@ -232,6 +236,7 @@ const FractionalizeForm: React.FC = () => {
               placeholder="Asset Price"
               value={formData.assetPrice}
               onChange={handleChange}
+              required
             />
           </div>
           <div
@@ -240,7 +245,7 @@ const FractionalizeForm: React.FC = () => {
           >
             <input
               className="block w-full bg-transparent border-0
-                 text-sm text-slate-700focus:outline-none p-2 
+                 text-sm text-slate-700focus:outline-none p-1.5
                  focus:ring-0"
               type="text"
               id="uri"
@@ -248,6 +253,7 @@ const FractionalizeForm: React.FC = () => {
               placeholder="Asset URI"
               value={formData.uri}
               onChange={handleChange}
+              required
             />
           </div>
           <div
@@ -256,7 +262,7 @@ const FractionalizeForm: React.FC = () => {
           >
             <input
               className="block w-full bg-transparent border-0
-                 text-sm text-slate-700focus:outline-none p-2 
+                 text-sm text-slate-700focus:outline-none p-1.5 
                  focus:ring-0"
               type="text"
               id="paymentToken"
@@ -264,6 +270,7 @@ const FractionalizeForm: React.FC = () => {
               placeholder="Payment Token Address"
               value={formData.paymentToken}
               onChange={handleChange}
+              required
             />
           </div>
           <div

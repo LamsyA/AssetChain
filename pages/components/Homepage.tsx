@@ -33,7 +33,7 @@ function Homepage() {
       </Link>
       {/* </button> */}
       {/* <FractionalizeForm/> */}
-      {/* <FractionalizeForm/> */}
+      <FractionalizeForm/>
     </div>
   );
 }

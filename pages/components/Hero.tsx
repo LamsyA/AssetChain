@@ -10,6 +10,9 @@ function Hero() {
   const openToggle = () => {
     setGlobalState("createModal", "scale-100");
   };
+  const fractionToggle = () => {
+    setGlobalState("fraction", "scale-100");
+  };
   return (
     <div className="relative bg-gray-800 overflow-hidden">
       {/* Gradient overlay */}
@@ -31,18 +34,23 @@ function Hero() {
               Get Started
             </button>
             
-            <button
-              onClick={openToggle}
+            
+        {/* Todo : Add admin wallet to issue COFO */}
+            {address == "0x4131811b8a4237712905650985A7474F8f92b18b" ? (
+             <button
+             onClick={openToggle}
+             className="px-6 py-3 cursor-pointer rounded-full bg-white text-gray-800 font-bold text-lg hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-300"
+           >
+             Issue COFO
+           </button>
+            ): (
+              <button
+              onClick={fractionToggle}
               className="px-6 py-3 cursor-pointer rounded-full bg-white text-gray-800 font-bold text-lg hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-300"
             >
-              Issue COFO
+              Fractionise Asset
             </button>
-        {/* Todo : Add admin wallet to issue COFO */}
-            {/* {address == null ? (
-              <button></button>
-            ): (
-              <button></button>
-            )} */}
+            )}
           </div>
         </div>
         <div id="learn-more" className="mt-12 max-w-4xl mx-auto">
