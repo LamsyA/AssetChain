@@ -1,6 +1,14 @@
 import { useState } from "react";
+import { useWriteContract } from 'wagmi'
+import {abi} from "../../../out/FractionOrderBook.sol/FractionOrderBook.json";
+import {FractionOrderContract} from "../../../CONSTANTS.json";
+
+import { writeContract } from "viem/actions";
 
 const CreateOrder = () => {
+  const { data: hash, 
+    isPending,error, writeContract } = useWriteContract();
+
   const [formData, setFormData] = useState({
     isBuy: true, // Default buy order selection
     asset: "",
@@ -17,6 +25,22 @@ const CreateOrder = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Buy Order:", formData);
+    try{
+      writeContract({
+        abi, address: `0x${FractionOrderContract}`, functionName:"createOrder", args:[formData.asset,formData.amount,formData.price,formData.paymentToken,formData.isBuy]
+      },{
+        onSuccess: (data)=> {
+          console.log("data:", data)
+        },
+        onError: (error)=>{
+          console.log("data: error", error)
+        } 
+        
+      })
+    }
+    catch(error){
+      console.log("error", error)
+    }
     // Add your logic to submit the buy order data here
     setFormData({
       isBuy: true, // Reset buy order selection after submission

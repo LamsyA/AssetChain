@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { useWriteContract } from 'wagmi'
+import {abi} from "../../../out/FractionOrderBook.sol/FractionOrderBook.json";
+import {FractionOrderContract} from "../../../CONSTANTS.json";
 
 const TerminateOrder = () => {
+  const { data: hash, 
+    isPending,error, writeContract } = useWriteContract();
+  
   const [orderId, setOrderId] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,6 +17,21 @@ const TerminateOrder = () => {
     event.preventDefault();
     console.log("Terminate Order:", orderId);
     // Add your logic to submit the terminate order data here
+    try{
+      writeContract({
+        abi, address: `0x${FractionOrderContract}`, functionName:"terminateOrder", args:[orderId]
+      },{
+        onSuccess: (data)=> {
+          console.log("data:", data)
+        },
+        onError: (error)=>{
+          console.log("data: error", error)
+        } 
+        
+      })
+    }catch(error){
+
+    }
     setOrderId(""); // Clear the form after submission
   };
 
