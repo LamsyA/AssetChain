@@ -6,8 +6,6 @@ import { abi } from "../../../out/COFO.sol/COFO.json";
 import { CofoContractAddress } from "../../../CONSTANTS.json";
 import { ethers } from "ethers";
 import {
-  setAlert,
-  setLoadingMsg,
   useGlobalState,
   setGlobalState,
 } from "../../store";
@@ -49,7 +47,6 @@ const IssueCertificateForm: React.FC = () => {
     event.preventDefault();
     if (!formData.address || !formData.tokenId || !formData.name) return;
     console.log("Issue Certificate:", formData);
-    setLoadingMsg("Creating Project...");
 
     const newhash = ethers.utils.formatBytes32String(
       `${formData.tokenId + formData.name + formData.symbol + formData.description + formData.uri}`,
@@ -77,13 +74,13 @@ const IssueCertificateForm: React.FC = () => {
           onSuccess: (data) => {
             console.log("data: ", data);
             toast.success("Certificate Issued");
-            setAlert("Certificate Issued");
           },
           onError: (error) => {
             console.log("error: ", error);
             toast.error(` Failed to issue certificate`);
-            setAlert("Failed to issue certificate", "red");
-          },
+          }
+          
+          
         },
       );
 

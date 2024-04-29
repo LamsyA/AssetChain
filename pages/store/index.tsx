@@ -9,17 +9,17 @@ const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
   alert: { show: false, msg: '', color: '' },
 });
 
-const setAlert = (msg: string, color = 'green') => {
-  setGlobalState('loading', { show: false, msg: '' })
-  setGlobalState('alert', { show: true, msg, color })
-  setTimeout(() => {
-    setGlobalState('alert', { show: false, msg, color })
-  }, 6000)
-}
+// const setAlert = (msg: string, color = 'green') => {
+//   setGlobalState('loading', { show: false, msg: '' })
+//   setGlobalState('alert', { show: true, msg, color })
+//   setTimeout(() => {
+//     setGlobalState('alert', { show: false, msg, color })
+//   }, 6000)
+// }
 
-const setLoadingMsg = (msg: string) => {
-  setGlobalState('loading', { show: true, msg })
-}
+// const setLoadingMsg = (msg: string) => {
+//   setGlobalState('loading', { show: true, msg })
+// }
 
 
 const slice = (
@@ -43,7 +43,7 @@ export {
   useGlobalState,
   setGlobalState,
   getGlobalState,
-  setLoadingMsg,
-  setAlert,
+  // setLoadingMsg,
+  // setAlert,
   slice,
 };
