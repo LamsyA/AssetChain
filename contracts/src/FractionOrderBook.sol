@@ -29,9 +29,9 @@ contract FractionOrderBook {
     }
 
     // this is a mapping fof the orders
-    mapping(uint256 => Order) public orders;
+    mapping(uint256 => Order) private orders;
     // this represents the order count
-    uint256 public orderCount;
+    uint256 private orderCount;
 
     event OrderCreated(
         address indexed owner,
@@ -109,4 +109,15 @@ contract FractionOrderBook {
 
         order.isTerminated = true;
     }
+    function getOrders() public view returns (Order[] memory) {
+    uint256 _count = orderCount;
+    Order[] memory result = new Order[](_count);
+    for (uint256 i = 0; i < _count; i++) {
+        result[i] = orders[i];
+    }
+    return result;
+}
+function getOrderCount() public view returns(uint256) {
+    return orderCount;
+}
 }

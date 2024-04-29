@@ -11,10 +11,8 @@ interface Order {
   terminated: boolean;
 }
 
-const [state,setState] = useState(false);
 const OrderBook: React.FC<{ orders: Order[] }> = ({ orders }) => {
- { orders.length == 0 ? setState(false) : setState(true) }
- if(state){
+console.log("here")
   return (
     <div className="flex flex-col bg-white rounded-lg shadow-md overflow-y-auto max-h-96">
       <div className="flex items-center px-4 py-2 font-medium text-gray-700 bg-gray-200">
@@ -32,7 +30,7 @@ const OrderBook: React.FC<{ orders: Order[] }> = ({ orders }) => {
       ))}
     </div>
   )};
-};
+
 
 const OrderRow: React.FC<{ order: Order }> = ({ order }) => {
   const statusColor = order.buyable ? "text-green-500" : "text-red-500";
@@ -46,8 +44,8 @@ const OrderRow: React.FC<{ order: Order }> = ({ order }) => {
       <div className="flex items-center">
         <div className="w-1/6 text-ellipsis overflow-hidden">{order.owner}</div>
         <div className="w-1/6 text-ellipsis overflow-hidden">{order.asset}</div>
-        <div className="w-1/6">{order.amount.toFixed(4)}</div>
-        <div className="w-1/6">{order.price.toFixed(2)}</div>
+        <div className="w-1/6">{Number(order.amount)}</div>
+        <div className="w-1/6">{Number(order.price)}</div>
         <div className="w-1/6 text-ellipsis overflow-hidden">{order.paymentToken}</div>
         <div className="w-1/6 text-center">{<span className={statusColor}>{order.buyable ? "Yes" : "No"}</span>}</div>
         <div className="w-1/6 text-center">{<span className="bg-gray-200 rounded-full px-2">{order.filled ? "Yes" : "No"}</span>}</div>
