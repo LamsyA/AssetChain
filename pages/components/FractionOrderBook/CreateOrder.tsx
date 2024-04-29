@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { useWriteContract } from 'wagmi'
-import {abi} from "../../../out/FractionOrderBook.sol/FractionOrderBook.json";
-import {FractionOrderContract} from "../../../CONSTANTS.json";
+import { useWriteContract } from "wagmi";
+import { abi } from "../../../out/FractionOrderBook.sol/FractionOrderBook.json";
+import { FractionOrderContract } from "../../../CONSTANTS.json";
 
 import { writeContract } from "viem/actions";
 
 const CreateOrder = () => {
-  const { data: hash, 
-    isPending,error, writeContract } = useWriteContract();
+  const { data: hash, isPending, error, writeContract } = useWriteContract();
 
   const [formData, setFormData] = useState({
     isBuy: true, // Default buy order selection
@@ -25,21 +24,31 @@ const CreateOrder = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log("Buy Order:", formData);
-    try{
-      writeContract({
-        abi, address: `0x${FractionOrderContract}`, functionName:"createOrder", args:[formData.asset,formData.amount,formData.price,formData.paymentToken,formData.isBuy]
-      },{
-        onSuccess: (data)=> {
-          console.log("data:", data)
+    try {
+      writeContract(
+        {
+          abi,
+          address: `0x${FractionOrderContract}`,
+          functionName: "createOrder",
+          args: [
+            formData.asset,
+            formData.amount,
+            formData.price,
+            formData.paymentToken,
+            formData.isBuy,
+          ],
         },
-        onError: (error)=>{
-          console.log("data: error", error)
-        } 
-        
-      })
-    }
-    catch(error){
-      console.log("error", error)
+        {
+          onSuccess: (data) => {
+            console.log("data:", data);
+          },
+          onError: (error) => {
+            console.log("data: error", error);
+          },
+        }
+      );
+    } catch (error) {
+      console.log("error", error);
     }
     // Add your logic to submit the buy order data here
     setFormData({
@@ -54,7 +63,7 @@ const CreateOrder = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="container mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full flex flex-col"
     >
       <h2 className="text-xl font-bold text-teal-600">Order Type</h2>
 

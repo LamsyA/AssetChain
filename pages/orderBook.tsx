@@ -11,11 +11,11 @@ import TerminateOrder from "./components/FractionOrderBook/TerminateOrder";
 const Main = () => {
   return (
     <div className="flex flex-col min-h-screen  items-center">
-      <header className="text-[#b24bf3] flex justify-between items-center px-4 py-4">
+      <header className="text-[#b24bf3] flex justify-between items-center px-4 py-8">
         <h1 className="text-xl font-medium">Order Book</h1>
         {/* Add any additional header elements here */}
       </header>
-      <main className="flex flex-grow flex-col overflow-hidden">
+      <main className="flex flex-grow flex-col overflow-hidden items-center">
         <div className="w-full md:w-3/4 px-4 py-4">
           <OrderBookGenerator />
         </div>

@@ -9,9 +9,11 @@ function Navbar() {
         <div className="flex justify-between items-center">
           <div
             className="text-3xl cursor-pointer  font-bold
-           text-white "
+           text-white z-50"
           >
-            <Link href={"/"}>AssetChain</Link>
+            <Link href={"/"} className="z-50">
+              AssetChain
+            </Link>
           </div>
           <div>
             <ConnectButton />
