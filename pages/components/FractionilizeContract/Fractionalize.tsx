@@ -6,8 +6,6 @@ import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
 
 import {
-  setAlert,
-  setLoadingMsg,
   useGlobalState,
   setGlobalState,
 } from "../../store";
