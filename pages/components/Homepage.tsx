@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "./Navbar/Navbar";
+import Navbar from "./Navbar/Navbar"
 import Hero from "./Hero";
 import Register from "./Register/Register";
 import Admin from "./adminowner/Admin";
@@ -18,12 +18,12 @@ import IssueCertificateForm from "./adminowner/IssueCertificate";
 function Homepage() {
   return (
     <div className="">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="">
         <Hero />
         <IssueCertificateForm />
       </div>
-      <Main/>
+      {/* <Main/> */}
       {/* <CreateOrder /> */}
       {/* <FillOrder /> */}
       {/* <TerminateOrder /> */}
@@ -31,11 +31,11 @@ function Homepage() {
       {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       type="button" onClick={() => router.push('/components/FractionilizeContract/Fractionalize/')}> */}
       <Link href="/components/FractionilizeContract/Fractionalize/">
-      Fractionalize
+        Fractionalize
       </Link>
       {/* </button> */}
       {/* <FractionalizeForm/> */}
-      <FractionalizeForm/>
+      <FractionalizeForm />
     </div>
   );
 }

@@ -27,6 +27,7 @@ import {
   ledgerWallet,
   trustWallet,
 } from "@rainbow-me/rainbowkit/wallets";
+import Navbar from "./components/Navbar/Navbar";
 
 const { wallets } = getDefaultWallets();
 
@@ -36,7 +37,7 @@ const config = getDefaultConfig({
   transports: {
     [mainnet.id]: http(""), // http('https://eth-mainnet.g.alchemy.com/v2/...')
     [sepolia.id]: http(
-      "https://eth-sepolia.g.alchemy.com/v2/jRWeU9pFpeATDtbmRTHOuSuSp5OVVAO0",
+      "https://eth-sepolia.g.alchemy.com/v2/jRWeU9pFpeATDtbmRTHOuSuSp5OVVAO0"
     ), // http('https://eth-sepolia.g.alchemy.com/v2/...')
     [scrollSepolia.id]: http("https://sepolia-rpc.scroll.io/"),
   },
@@ -67,6 +68,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     <WagmiProvider config={config}>
       <QueryClientProvider client={client}>
         <RainbowKitProvider>
+          <Navbar />
+
           <Component {...pageProps} />
           <ToastContainer />
         </RainbowKitProvider>
