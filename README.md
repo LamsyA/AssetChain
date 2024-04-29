@@ -13,9 +13,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
 ## contract Address on Scroll
-Cofo ```0x8fafEB727d25D2DB7C77f2F328DFf7796e3EF16B ``` <br>
-FractionalizerFactory ```0x0673C334Ae5440eda0733A4AbC37Dc4e1021e05C ``` <br>
-FractionOderBook ```0x1d5E5A0F51dA2CdFb47952cbf95423809dEC0020 ```
+Cofo ``` 0x6C7B605918DeC133C4423b2f8C3C6EA7Be4Acc14 ``` <br>
+FractionalizerFactory ```0x14416b37Ff884713024565428C5F249342c63A2d ``` <br>
+FractionOderBook ````0x15aD989D47994F2508f23c3A539639cD5602aBA0 ```
 ## Learn More
 
 To learn more about this stack, take a look at the following resources:

@@ -3,52 +3,40 @@ import { useWriteContract, useReadContract } from "wagmi";
 import { abi } from "../../../out/FractionOrderBook.sol/FractionOrderBook.json";
 import { FractionOrderContract } from "../../../CONSTANTS.json";
 import OrderBook from "./OrderBook";
+import { readContract } from '@wagmi/core'
+import { config } from '../../../config'
 
 const OrderBookGenerator = () => {
- const { data: hash, writeContract } = useWriteContract();
- const [orders, setOrders] = useState([]); // State to store all orders
- const [tokenState, setTokenState] = useState(true); // State for the token ID
+  const { data: hash, writeContract } = useWriteContract();
+  const [orders, setOrders] = useState<any[]>([]); // State to store all orders
+  const [tokenState, setTokenState] = useState<boolean>(true); // State for the token ID
 
- const { data: orderCount } = useReadContract({
-    abi,
-    address: `0x${FractionOrderContract}`,
-    functionName: "orderCount",
- });
+  useEffect(() => {
+    display();
+  }, []); // Empty dependency array to run only once on component mount
 
- const numericOrderCount = orderCount as number;
-
-if(orderCount && tokenState ){
-console.log("jii")
-  let allOrders: any = [];
-  for (let i = 0; i < numericOrderCount; i++) {
-    // Fetch each order asynchronously
-    const { data: orderStruct } = useReadContract({
-      abi,
-      address: `0x${FractionOrderContract}`,
-      functionName: "order",
-      args: [1],
-    });
-    allOrders.push(orderStruct); // Add fetched order data to the array
+  const display = async () => {
+    try {
+      const result = await readContract(config, {
+        abi,
+        address: `0x${FractionOrderContract}`,
+        functionName: "getOrders",
+      });
+      console.log(result);
+      setOrders(result as any[]);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
   }
-  setOrders(allOrders);
-  setTokenState(false);
-}
 
- // Fetch order book data on component mount
- useEffect(() => {
-  console.log("hi")
-    setTokenState(true);
- }, []); // Dependencies for effect
+  // Handle loading, error, and order data display logic here
 
- // Handle loading, error, and order data display logic here
-
- return (
-  <>
-    {orders.length === 0 ? null : <OrderBook orders={orders} />}
-    {/* Order book content using orders state goes here */}
-  </>
-);
-
+  return (
+    <>
+      {orders.length === 0 ? null : <OrderBook orders={orders} />}
+      {/* Order book content using orders state goes here */}
+    </>
+  );
 };
 
 export default OrderBookGenerator;
