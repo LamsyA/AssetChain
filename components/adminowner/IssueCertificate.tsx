@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useWriteContract } from "wagmi";
 import { FaTimes } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { abi } from "../../../out/COFO.sol/COFO.json";
-import { CofoContractAddress } from "../../../CONSTANTS.json";
+import { abi } from "../../out/COFO.sol/COFO.json";
+import { CofoContractAddress } from "../../CONSTANTS.json";
 import { ethers } from "ethers";
 import {
   useGlobalState,

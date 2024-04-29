@@ -1,8 +1,8 @@
 import React from "react";
-import OrderBookGenerator from "./components/FractionOrderBook/OrderBookGenerator";
-import CreateOrder from "./components/FractionOrderBook/CreateOrder";
-import FillOrder from "./components/FractionOrderBook/FillOrder";
-import TerminateOrder from "./components/FractionOrderBook/TerminateOrder";
+import OrderBookGenerator from "../components/FractionOrderBook/OrderBookGenerator";
+import CreateOrder from "../components/FractionOrderBook/CreateOrder";
+import FillOrder from "../components/FractionOrderBook/FillOrder";
+import TerminateOrder from "../components/FractionOrderBook/TerminateOrder";
 // import CreateOrder from "./CreateOrder";
 // import FillOrder from "./FillOrder";
 // import OrderBookGenerator from "./OrderBookGenerator";
@@ -19,16 +19,23 @@ const Main = () => {
         <div className="w-full md:w-3/4 px-4 py-4">
           <OrderBookGenerator />
         </div>
-        <div className="w-full md:w-1/4 px-4 py-4">
-          <div className="mb-4">
+        <div className="w-full  md:w-[1000px] px-4 py-4 flex justify-between ">
+          <div className="mb-4 rounded-md  border">
             <CreateOrder />
           </div>
           <div className="mb-4">
+            <div className="mb-4">
             <FillOrder />
-          </div>
-          <div>
+
+            </div>
+            <div>
             <TerminateOrder />
+
+            </div>
+
           </div>
+        
+          
         </div>
       </main>
     </div>

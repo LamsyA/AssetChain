@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useWriteContract } from 'wagmi'
-import {abi} from "../../../out/FractionOrderBook.sol/FractionOrderBook.json";
-import {FractionOrderContract} from "../../../CONSTANTS.json";
+import {abi} from "../../out/FractionOrderBook.sol/FractionOrderBook.json";
+import {FractionOrderContract} from "../../CONSTANTS.json";
 
 const TerminateOrder = () => {
   const { data: hash, 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useWriteContract, useReadContract } from "wagmi";
-import { abi } from "../../../out/FractionOrderBook.sol/FractionOrderBook.json";
-import { FractionOrderContract } from "../../../CONSTANTS.json";
+import { abi } from "../../out/FractionOrderBook.sol/FractionOrderBook.json";
+import { FractionOrderContract } from "../../CONSTANTS.json";
 import OrderBook from "./OrderBook";
 import { readContract } from '@wagmi/core'
-import { config } from '../../../config'
+import { config } from '../../config'
 
 const OrderBookGenerator = () => {
   const { data: hash, writeContract } = useWriteContract();

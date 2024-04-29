@@ -27,7 +27,7 @@ import {
   ledgerWallet,
   trustWallet,
 } from "@rainbow-me/rainbowkit/wallets";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "../components/Navbar/Navbar";
 
 const { wallets } = getDefaultWallets();
 

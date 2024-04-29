@@ -1,7 +1,7 @@
 import React, { useState, FormEvent } from "react";
 import { useWriteContract } from "wagmi";
-import { abi } from "../../../out/FractionalizerFactory.sol/FractionalizerFactory.json";
-import { FractionalizeFactory } from "../../../CONSTANTS.json";
+import { abi } from "../../out/FractionalizerFactory.sol/FractionalizerFactory.json";
+import { FractionalizeFactory } from "../../CONSTANTS.json";
 import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
 
