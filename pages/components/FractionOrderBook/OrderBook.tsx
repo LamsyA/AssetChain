@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface Order {
   owner: string;
@@ -11,7 +11,10 @@ interface Order {
   terminated: boolean;
 }
 
+const [state,setState] = useState(false);
 const OrderBook: React.FC<{ orders: Order[] }> = ({ orders }) => {
+ { orders.length == 0 ? setState(false) : setState(true) }
+ if(state){
   return (
     <div className="flex flex-col bg-white rounded-lg shadow-md overflow-y-auto max-h-96">
       <div className="flex items-center px-4 py-2 font-medium text-gray-700 bg-gray-200">
@@ -28,7 +31,7 @@ const OrderBook: React.FC<{ orders: Order[] }> = ({ orders }) => {
         <OrderRow key={order.owner + order.asset} order={order} />
       ))}
     </div>
-  );
+  )};
 };
 
 const OrderRow: React.FC<{ order: Order }> = ({ order }) => {
