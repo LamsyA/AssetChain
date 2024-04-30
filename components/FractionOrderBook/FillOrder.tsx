@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useWriteContract } from 'wagmi'
 import {abi} from "../../out/FractionOrderBook.sol/FractionOrderBook.json";
 import {FractionOrderContract} from "../../CONSTANTS.json";
+import { toast } from "react-toastify";
 
 const FillOrder = () => {
   const { data: hash, 
@@ -20,6 +21,8 @@ const FillOrder = () => {
         abi, address: `0x${FractionOrderContract}`, functionName:"fillOrder", args:[tokenId]
       },{
         onSuccess: (data)=> {
+          toast.success(`Your Asset transaction hash: ${data}`); 
+
           console.log("data:", data)
         },
         onError: (error)=>{

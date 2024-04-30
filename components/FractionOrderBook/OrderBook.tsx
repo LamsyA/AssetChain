@@ -8,7 +8,7 @@ interface Order {
   paymentToken: string;
   buyable: boolean;
   filled: boolean;
-  terminated: boolean;
+  isTerminated: boolean;
 }
 
 const OrderBook: React.FC<{ orders: Order[] }> = ({ orders }) => {
@@ -35,7 +35,7 @@ console.log("here")
 const OrderRow: React.FC<{ order: Order }> = ({ order }) => {
   const statusColor = order.buyable ? "text-green-500" : "text-red-500";
   const filledColor = order.filled ? "bg-green-100" : "bg-white";
-  const terminatedColor = order.terminated ? "bg-red-100" : "bg-white";
+  const terminatedColor = order.isTerminated ? "bg-red-100" : "bg-white";
 
   return (
     <div
@@ -49,7 +49,7 @@ const OrderRow: React.FC<{ order: Order }> = ({ order }) => {
         <div className="w-1/6 text-ellipsis overflow-hidden">{order.paymentToken}</div>
         <div className="w-1/6 text-center">{<span className={statusColor}>{order.buyable ? "Yes" : "No"}</span>}</div>
         <div className="w-1/6 text-center">{<span className="bg-gray-200 rounded-full px-2">{order.filled ? "Yes" : "No"}</span>}</div>
-        <div className="w-1/6 text-center">{<span className="bg-gray-200 rounded-full px-2">{order.terminated ? "Yes" : "No"}</span>}</div>
+        <div className="w-1/6 text-center">{<span className="bg-gray-200 rounded-full px-2">{order.isTerminated ? "Yes" : "No"}</span>}</div>
       </div>
     </div>
   );

@@ -4,11 +4,14 @@ import { abi } from "../../out/FractionalizerFactory.sol/FractionalizerFactory.j
 import { FractionalizeFactory } from "../../CONSTANTS.json";
 import { toast } from "react-toastify";
 import { FaTimes } from "react-icons/fa";
+import { watchContractEvent } from '@wagmi/core'
+import { config } from "../../config";
 
 import {
   useGlobalState,
   setGlobalState,
 } from "../../store";
+import { ethers } from "ethers";
 
 
 interface FractionalizeData {
@@ -23,6 +26,7 @@ interface FractionalizeData {
 }
 
 const FractionalizeForm: React.FC = () => {
+  let FractionalizerAddress: any;
   const { data: hash, isPending,isSuccess,  error, writeContract } = useWriteContract();
   const [fraction] = useGlobalState("fraction");
 
@@ -65,19 +69,22 @@ const FractionalizeForm: React.FC = () => {
             formData.uri,
           ],
         }, {
-          onSuccess: (data) => {
+          onSuccess: async(data:any) => {
             console.log("data: ", data);
-            toast.success("Fractionalized Assest Deployed"); 
-             setFormData({
-      tokenId: "",
-      assetManager: "",
-      assetName: "",
-      assetSymbol: "",
-      assetPrice: "",
-      paymentToken: "",
-      description: "",
-      uri: "",
-    });
+            const contractAddress = data?.to; 
+            console.log("contractAddress: ", contractAddress);
+            toast.success(`Your Asset transaction hash: ${data}`); 
+            onClose();
+    //          setFormData({
+    //   tokenId: "",
+    //   assetManager: "",
+    //   assetName: "",
+    //   assetSymbol: "",
+    //   assetPrice: "",
+    //   paymentToken: "",
+    //   description: "",
+    //   uri: "",
+    // });
           },
           onError: (error) => {
             console.log("error: ", error);
@@ -85,6 +92,28 @@ const FractionalizeForm: React.FC = () => {
           },
         },
       );
+      
+      
+        const provider = new ethers.providers.JsonRpcProvider("https://sepolia-rpc.scroll.io/");
+        const contract = new ethers.Contract(`0x${FractionalizeFactory}`, abi, provider)
+        const eventFilter = contract.filters.FractionalizerCreated(); 
+         // Event listener
+         
+           contract.on(eventFilter, (fractionalizer, tokenId, event) => {
+            FractionalizerAddress = fractionalizer;
+            console.log("FractionalizerCreated event emitted:");
+            console.log("Your Asset Contract Address: ", fractionalizer);
+            console.log("Token ID:", tokenId.toString());
+            // console.log("Event:", event);
+          });
+      
+      // toast.promise(newFractionalizerPromise, {
+      //   pending: "Fractionalizing...",
+      //   success: `Contract Address: ${FractionalizerAddress}`,
+      //   error: "Fractionalization failed",
+      // })
+
+
     } catch (error) {
       console.log("error: ", error);
     }
@@ -116,6 +145,9 @@ const FractionalizeForm: React.FC = () => {
     });
   };
 
+   
+  
+ 
   return (
    
     <div
@@ -133,6 +165,7 @@ const FractionalizeForm: React.FC = () => {
               {" "}
               Fractionalize Asset
             </p>
+
             <button
               type="button"
               className="border-0 bg- text-black focus:outline-none "
@@ -142,6 +175,7 @@ const FractionalizeForm: React.FC = () => {
             </button>
           </div>
           <div className="flex justify-center items-center mt-1">
+            
             <div className="rounded-xl overflow-hidden h-20 w-20 animate-pulse">
               <img
                 src={
@@ -152,6 +186,8 @@ const FractionalizeForm: React.FC = () => {
               />
             </div>
           </div>
+          {/* <h2 className="text-black:text-sm ">{ "FractionalizerAddress:"} { newFractionalizer?.toString()}</h2> */}
+
           <div
             className="flex justify-between items-center bg-gray-300
             rounded-xl mt-5"
