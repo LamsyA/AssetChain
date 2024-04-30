@@ -49,7 +49,7 @@ const IssueCertificateForm: React.FC = () => {
     console.log("Issue Certificate:", formData);
 
     const newhash = ethers.utils.formatBytes32String(
-      `${formData.tokenId + formData.name + formData.symbol + formData.description + formData.uri}`,
+      `${formData.tokenId + formData.name + formData.symbol+ formData.uri}`,
     );
 
     let MetaData = {
